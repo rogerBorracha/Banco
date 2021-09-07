@@ -4,7 +4,7 @@ public class Banco {
     public static void main(String[] args) {
     	Gerente gerente1 = new Gerente();
     	gerente1.salarioGerente = 1000;
-    	System.out.println(gerente1.salarioGerente);
+    	System.out.println("Salario inicial do gerente: "+gerente1.salarioGerente);
     	System.out.println("Digite 1 ou 2");
     	Scanner teclado = new Scanner(System.in);
     	int num = teclado.nextInt();
@@ -35,6 +35,22 @@ public class Banco {
 
     	System.out.println("Saldo da primeira conta: "+ origem.saldo);
     	System.out.println("Saldo da segunda conta: "+ destino.saldo);
+    	
+    	System.out.println("---------------------------------------------------");
+
+    	Funcionario funcionario1 = new Funcionario();
+    	funcionario1.nomeFuncionario = "José";
+    	funcionario1.salarioFuncionario = 1000;
+    	Funcionario.valeRefeicaoDiario = 15;
+    	
+    	System.out.println("O funcionario: "+funcionario1.nomeFuncionario+" tem o salario de: "+funcionario1.salarioFuncionario);
+    	System.out.println("Ele tambem recebe: "+Funcionario.valeRefeicaoDiario+" de VR diario");
+    	
+    	Funcionario.aumentoValeRefeicao(50);
+    	
+    	System.out.println("O aumento do VR foi para: "+Funcionario.valeRefeicaoDiario);
+
+
 
     }
 }
@@ -101,5 +117,14 @@ class Gerente{
 	}
 	public void aumentoSalarial(double taxaVariavel) {
 		this.salarioGerente += (this.salarioGerente * (taxaVariavel/100));
+	}
+}
+class Funcionario{
+	public String nomeFuncionario;
+	public double salarioFuncionario;
+	public static double valeRefeicaoDiario;
+	
+	static void aumentoValeRefeicao(double taxaVariavel) {
+		Funcionario.valeRefeicaoDiario += (Funcionario.valeRefeicaoDiario * (taxaVariavel/100));
 	}
 }
