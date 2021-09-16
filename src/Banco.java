@@ -3,28 +3,31 @@ import java.util.Scanner;
 public class Banco {
     public static void main(String[] args) {
     	Gerente gerente1 = new Gerente();
-    	gerente1.salarioGerente = 1000;
-    	System.out.println("Salario inicial do gerente: "+gerente1.salarioGerente);
-    	System.out.println("Digite 1 ou 2");
+    	gerente1.setSalarioGerente(1000);
+    	System.out.println("Salario inicial do gerente: R$"+gerente1.getSalarioGerente());
+    	System.out.println("Digite 1 para 10% ou um numero qualquer para 50%");
     	Scanner teclado = new Scanner(System.in);
     	int num = teclado.nextInt();
     	if (num == 1) {
     		gerente1.aumentoSalarial();
-        	System.out.println(gerente1.salarioGerente);
+        	System.out.println("Novo salario do gerente: R$"+gerente1.getSalarioGerente());
     	}else {
     		gerente1.aumentoSalarial(50);
-        	System.out.println(gerente1.salarioGerente);
+        	System.out.println("Novo salario do gerente: R$"+gerente1.getSalarioGerente());
     	}
+    	
+    	System.out.println("---------------------------------------------------");
+
     	Agencia a = new Agencia(9876);
     	Agencia b = new Agencia(1234);
 
     	Conta origem = new Conta(a);
-    	origem.saldo = 1000;
-    	System.out.println("Saldo da primeira conta: "+ origem.saldo);
+    	origem.setSaldo(2000);;
+    	System.out.println("Saldo da primeira conta: R$"+ origem.getSaldo());
     	
     	Conta destino = new Conta(b);
-    	destino.saldo = 1000;
-    	System.out.println("Saldo da segunda conta: "+ destino.saldo);
+    	destino.setSaldo(1000);;
+    	System.out.println("Saldo da segunda conta: R$"+ destino.getSaldo());
 
     	System.out.println("---------------------------------------------------");
     	
@@ -33,22 +36,22 @@ public class Banco {
     	
     	System.out.println("---------------------------------------------------");
 
-    	System.out.println("Saldo da primeira conta: "+ origem.saldo);
-    	System.out.println("Saldo da segunda conta: "+ destino.saldo);
+    	System.out.println("Saldo da primeira conta: R$"+ origem.getSaldo());
+    	System.out.println("Saldo da segunda conta: R$"+ destino.getSaldo());
     	
     	System.out.println("---------------------------------------------------");
 
     	Funcionario funcionario1 = new Funcionario();
-    	funcionario1.nomeFuncionario = "José";
-    	funcionario1.salarioFuncionario = 1000;
+    	funcionario1.setNomeFuncionario("José");
+    	funcionario1.setSalarioFuncionario(1000);
     	Funcionario.valeRefeicaoDiario = 15;
     	
-    	System.out.println("O funcionario: "+funcionario1.nomeFuncionario+" tem o salario de: "+funcionario1.salarioFuncionario);
-    	System.out.println("Ele tambem recebe: "+Funcionario.valeRefeicaoDiario+" de VR diario");
+    	System.out.println("O funcionario: "+funcionario1.getNomeFuncionario()+" tem o salario de: R$"+funcionario1.getSalarioFuncionario());
+    	System.out.println("Ele tambem recebe: R$"+Funcionario.valeRefeicaoDiario+" de VR diario");
     	
     	Funcionario.aumentoValeRefeicao(50);
     	
-    	System.out.println("O aumento do VR foi para: "+Funcionario.valeRefeicaoDiario);
+    	System.out.println("O aumento do VR foi para: R$"+Funcionario.valeRefeicaoDiario);
 
 
 
@@ -56,8 +59,8 @@ public class Banco {
 }
 
 class Pessoa {
-    public String rg;
-    public int cpf;
+    private String rg;
+    private int cpf;
 
     public Pessoa(String rg){
         this.rg = rg;
@@ -68,9 +71,16 @@ class Pessoa {
     }
 }
 class Conta {
-    public Agencia agencia;
-    public double saldo;
-    public double limite;
+    private Agencia agencia;
+    private double saldo;
+    private double limite;
+    
+    public double getSaldo() {
+    	return this.saldo;
+    }
+    public void setSaldo(double saldo) {
+    	this.saldo = saldo;
+    }
 
     public Conta(Agencia agencia) {
         this.agencia = agencia;
@@ -97,20 +107,28 @@ class Conta {
     }
 }
 class CartaoDeCredito {
-    public int numero;
+	private int numero;
     public CartaoDeCredito(int numero) {
     	this.numero = numero;
     }
 }
 class Agencia {
-    public int numero;
+	private int numero;
     public Agencia(int numero) {
     	this.numero = numero;
     }
 }
 class Gerente{
-	public double salarioGerente;
-	public String nomeGerente;
+	private double salarioGerente;
+	private String nomeGerente;
+	
+	public double getSalarioGerente() {
+		return this.salarioGerente;
+	}
+	
+	public void setSalarioGerente(double salarioGerente) {
+		this.salarioGerente = salarioGerente;
+	}
 	
 	public void aumentoSalarial() {
 		this.aumentoSalarial(10);
@@ -120,9 +138,23 @@ class Gerente{
 	}
 }
 class Funcionario{
-	public String nomeFuncionario;
-	public double salarioFuncionario;
+	private String nomeFuncionario;
+	private double salarioFuncionario;
 	public static double valeRefeicaoDiario;
+	
+	public String getNomeFuncionario() {
+		return this.nomeFuncionario;
+	}
+	public void setNomeFuncionario(String nomeFuncionario) {
+		this.nomeFuncionario = nomeFuncionario;
+	}
+	
+	public double getSalarioFuncionario() {
+		return this.salarioFuncionario;
+	}
+	public void setSalarioFuncionario(double salarioFuncionario) {
+		this.salarioFuncionario = salarioFuncionario;
+	}
 	
 	static void aumentoValeRefeicao(double taxaVariavel) {
 		Funcionario.valeRefeicaoDiario += (Funcionario.valeRefeicaoDiario * (taxaVariavel/100));
